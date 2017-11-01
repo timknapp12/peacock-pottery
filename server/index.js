@@ -92,6 +92,16 @@ app.get('/logout', (req, res) => {
     res.redirect('http://localhost:3000/');
 })
 
+
+// CART endpoints
+
+//show all items in cart
+
+//add to cart
+
+//remove from cart
+
+
 app.listen(port, () => console.log(`listening on port ${port}`));
 
 
