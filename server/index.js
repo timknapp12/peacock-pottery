@@ -7,7 +7,8 @@ const express = require("express"),
   passport = require("passport"),
   Auth0Strategy = require("passport-auth0"),
   massive = require("massive"),
-  products_controller = require('./controllers/products_controller');
+  products_controller = require('./controllers/products_controller'),
+  cart_controller = require('./controllers/cart_controller');
 
 const app = express();
 
@@ -100,7 +101,7 @@ app.get('/api/products', products_controller.read);
 //show all items in cart
 
 //add to cart
-
+app.put('api/cart/:id', cart_controller.update);
 //remove from cart
 
 

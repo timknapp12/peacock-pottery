@@ -15,13 +15,18 @@ export default function reducer(state = initialState, action) {
     switch (action.type) {
         case GET_ALL_PRODUCTS +'_FULFILLED':
             return Object.assign({}, state, {products: action.payload});
-        case ADD_TO_CART:
+        case ADD_TO_CART + '_FULFILLED':
+            if (state.cart.indexOf(action.payload) === -1) {
+                return {
+                    // not sure if I did this part correctly- the example from the mini project also had 'swag' listed as things to be returned- although I don't have swag in my app, but maybe products????    Will this only let me order ONE QTY per item???
+                    cart: [...state.cart, action.payload]
+                }
+            }
+
+        case REMOVE_FROM_CART + '_FULFILLED':
             return Object.assign({}, state, {cart: action.payload});
 
-        case REMOVE_FROM_CART:
-            return Object.assign({}, state, {cart: action.payload});
-
-        case SHOW_CART:
+        case SHOW_CART + '_FULFILLED':
             return state.cart;
     
         default:
@@ -29,18 +34,20 @@ export default function reducer(state = initialState, action) {
     }   
 }
 
+
+//action creators
+
 export function getAllProducts() {
-    console.log('hey')
     return {
         type: GET_ALL_PRODUCTS,
         payload: axios.get('/api/products').then(res => res.data)
     }
 }
 
-export function addToCart(product) {
+export function addToCart(product_id) {
     return {
         type: ADD_TO_CART,
-        payload: product
+        payload: product_id
     }
 }
 
