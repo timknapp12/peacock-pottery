@@ -6,7 +6,8 @@ const express = require("express"),
   session = require("express-session"),
   passport = require("passport"),
   Auth0Strategy = require("passport-auth0"),
-  massive = require("massive");
+  massive = require("massive"),
+  products_controller = require('./controllers/products_controller');
 
 const app = express();
 
@@ -44,17 +45,17 @@ passport.use(
       const userData = profile._json;
       db.find_user([userData.identities[0].user_id]).then(user => {
         if (user[0]) {
-          return done(null, user[0].id);
+          return done(null, user[0].user_id);
         } else {
-          db
-            .create_user([
+          db.create_user([
               userData.name,
               userData.email,
               userData.picture,
               userData.identities[0].user_id
             ])
             .then(user => {
-                return done(null, user[0].id);
+              console.log(user)
+                return done(null, user[0].user_id);
             });
         }
       });
@@ -93,7 +94,8 @@ app.get('/logout', (req, res) => {
 })
 
 
-// CART endpoints
+// get all products
+app.get('/api/products', products_controller.read);
 
 //show all items in cart
 
