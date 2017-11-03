@@ -97,13 +97,14 @@ app.get('/logout', (req, res) => {
 
 // get all products
 app.get('/api/products', products_controller.read);
-
+//find_cart/create_cart
+app.get('/api/cart/check', cart_controller.create)
 //show all items in cart
-
+app.get('/api/cart', cart_controller.read);
 //add to cart
 app.put('api/cart/:id', cart_controller.update);
 //remove from cart
-
+app.delete('/api/cart/:id', cart_controller.delete);
 
 app.listen(port, () => console.log(`listening on port ${port}`));
 

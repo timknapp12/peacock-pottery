@@ -3,8 +3,7 @@ import "./Shop.css";
 import Navbar from '../Navbar/Navbar';
 import { getAllProducts, addToCart } from '../../ducks/reducer';
 import { connect } from 'react-redux';
-
-
+import Item from './Item/Item';
 
 
 
@@ -17,7 +16,17 @@ class Shop extends Component {
 
 
     render() {
-        // const displayProducts = 
+        const displayProducts = this.props.products.map((product) => 
+    (
+        <Item
+        key={ product.product_id }
+        product_id={ product.product_id }
+        product_name={ product.product_name }
+        price={ product.price }
+        image={ product.image }
+        addToCart={ addToCart }
+        />
+    ))
         
         console.log(this.props.products);
         return(
@@ -25,6 +34,7 @@ class Shop extends Component {
                 <h1>Shop Page</h1>
                 <Navbar/>
                 <div>
+                { displayProducts }
                 </div> 
             </div> 
         )

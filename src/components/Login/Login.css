@@ -1,0 +1,20 @@
+.login {
+    display: flex;
+   justify-content: center;
+   align-items: center;
+   /* position: relative; */
+}
+
+.videoTag {
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    bottom: 0px;
+    position: fixed;
+    z-index: -1;
+}
+
+.loginButton {
+    display: flex;
+    margin-top: 350px;
+} 
